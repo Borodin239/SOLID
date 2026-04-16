@@ -1,0 +1,22 @@
+-------------
+@Repository
+public class MySqlReportRepository {
+    public String getReport() {
+        return "Report from MySQL";
+    }
+}
+-------------
+@Service
+public class ReportService {
+
+    private final MySqlReportRepository repository = new MySqlReportRepository();
+
+    public String buildReport() {
+        return repository.getReport();
+    }
+}
+-------------
+ReportService жестко связан с MySqlReportRepository:
+- трудно заменить БД,
+- трудно тестировать,
+- нельзя легко подменить зависимость.

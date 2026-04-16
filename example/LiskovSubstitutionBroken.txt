@@ -1,0 +1,31 @@
+-------------
+public class Bird {
+    public void fly() {
+        System.out.println("Bird flies");
+    }
+}
+-------------
+public class Sparrow extends Bird {
+    @Override
+    public void fly() {
+        System.out.println("Sparrow flies");
+    }
+}
+-------------
+public class Penguin extends Bird {
+    @Override
+    public void fly() {
+        throw new UnsupportedOperationException("Penguin can't fly");
+    }
+}
+-------------
+@Service
+public class BirdService {
+    public void makeBirdFly(Bird bird) {
+        bird.fly();
+    }
+}
+-------------
+
+Penguin формально является Bird, но не может выполнять контракт fly().  
+Значит, подстановка ломает программу.

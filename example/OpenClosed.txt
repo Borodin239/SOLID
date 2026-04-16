@@ -1,0 +1,70 @@
+-------------
+public interface PaymentProcessor {
+    String getType();
+    void pay(double amount);
+}
+-------------
+@Component
+public class CardPaymentProcessor implements PaymentProcessor {
+    @Override
+    public String getType() {
+        return "CARD";
+    }
+
+    @Override
+    public void pay(double amount) {
+        System.out.println("Paying by card: " + amount);
+    }
+}
+-------------
+@Component
+public class PaypalPaymentProcessor implements PaymentProcessor {
+    @Override
+    public String getType() {
+        return "PAYPAL";
+    }
+
+    @Override
+    public void pay(double amount) {
+        System.out.println("Paying by PayPal: " + amount);
+    }
+}
+-------------
+@Component
+public class CashPaymentProcessor implements PaymentProcessor {
+    @Override
+    public String getType() {
+        return "CASH";
+    }
+
+    @Override
+    public void pay(double amount) {
+        System.out.println("Paying by cash: " + amount);
+    }
+}
+-------------
+@Service
+public class PaymentService {
+
+    private final Map<String, PaymentProcessor> processors;
+
+    public PaymentService(List<PaymentProcessor> processorList) {
+        this.processors = processorList.stream()
+                .collect(java.util.stream.Collectors.toMap(
+                        PaymentProcessor::getType,
+                        p -> p
+                ));
+    }
+
+    public void pay(String paymentType, double amount) {
+        PaymentProcessor processor = processors.get(paymentType);
+        if (processor == null) {
+            throw new IllegalArgumentException("Unknown payment type");
+        }
+        processor.pay(amount);
+    }
+}
+---------------
+Если нужно добавить новый тип оплаты, например СБП:
+- создаем новый класс SbpPaymentProcessor,
+- PaymentService менять не нужно.

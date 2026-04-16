@@ -1,0 +1,27 @@
+--------------
+public interface ReportRepository {
+    String getReport();
+}
+--------------
+@Repository
+public class MySqlReportRepository implements ReportRepository {
+    @Override
+    public String getReport() {
+        return "Report from MySQL";
+    }
+}
+--------------
+@Service
+@RequiredArgsConstructor
+public class ReportService {
+
+    private final ReportRepository reportRepository;
+
+    public String buildReport() {
+        return reportRepository.getReport();
+    }
+}
+--------------
+- Можно легко сделать другую реализацию, например PostgresReportRepository.
+- Можно подменить зависимость в тестах.
+- Spring сам внедрит нужную реализацию через DI.

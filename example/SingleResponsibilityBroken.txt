@@ -1,0 +1,26 @@
+@Service
+@RequiredArgsConstructor
+public class OrderService {
+
+    private final OrderRepository orderRepository;
+
+    public void createOrder(Order order) {
+        // валидация
+        if (order.getAmount() <= 0) {
+            throw new IllegalArgumentException("Amount must be positive");
+        }
+
+        // сохранение
+        orderRepository.save(order);
+
+        // отправка уведомления
+        System.out.println("Send email: order created");
+    }
+
+}
+
+OrderService делает сразу несколько вещей:
+- валидирует заказ,
+- сохраняет в БД,
+- отправляет уведомление.
+Если изменится логика валидации, уведомлений или логирования — придется менять этот же класс.

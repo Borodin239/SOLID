@@ -1,0 +1,42 @@
+--------------
+public interface Worker {
+    void writeCode();
+    void testCode();
+    void deployApp();
+}
+--------------
+public class Developer implements Worker {
+    @Override
+    public void writeCode() {
+        System.out.println("Developer writes code");
+    }
+
+    @Override
+    public void testCode() {
+        System.out.println("Developer tests code");
+    }
+
+    @Override
+    public void deployApp() {
+        throw new UnsupportedOperationException("Developer does not deploy app");
+    }
+}
+--------------
+public class DevOpsEngineer implements Worker {
+    @Override
+    public void writeCode() {
+        throw new UnsupportedOperationException("DevOps does not write business code");
+    }
+
+    @Override
+    public void testCode() {
+        throw new UnsupportedOperationException("DevOps does not test manually");
+    }
+
+    @Override
+    public void deployApp() {
+        System.out.println("DevOps deploys app");
+    }
+}
+--------------
+Классы вынуждены реализовывать лишние методы, которые им не нужны.

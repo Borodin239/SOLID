@@ -1,0 +1,21 @@
+@Service
+public class PaymentService {
+
+    public void pay(String paymentType, double amount) {
+        if ("CARD".equals(paymentType)) {
+            System.out.println("Paying by card: " + amount);
+        } else if ("PAYPAL".equals(paymentType)) {
+            System.out.println("Paying by PayPal: " + amount);
+        } else if ("CASH".equals(paymentType)) {
+            System.out.println("Paying by cash: " + amount);
+        } else {
+            throw new IllegalArgumentException("Unknown payment type");
+        }
+    }
+}
+
+
+Каждый раз, когда появляется новый способ оплаты:
+- нужно менять существующий класс,
+- растет количество if/else,
+- выше риск сломать старую логику.

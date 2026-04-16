@@ -1,0 +1,42 @@
+--------------
+public interface Coder {
+    void writeCode();
+}
+--------------
+public interface Tester {
+    void testCode();
+}
+--------------
+public interface Deployer {
+    void deployApp();
+}
+--------------
+public class Developer implements Coder, Tester {
+
+    @Override
+    public void writeCode() {
+        System.out.println("Developer writes code");
+    }
+
+    @Override
+    public void testCode() {
+        System.out.println("Developer tests code");
+    }
+
+}
+--------------
+public class DevOpsEngineer implements Deployer {
+
+    @Override
+    public void deployApp() {
+        System.out.println("DevOps deploys app");
+    }
+
+}
+--------------
+
+Если в реализации часто появляются:
+- пустые методы,
+- UnsupportedOperationException,
+- “заглушки”,
+то интерфейс, вероятно, переполнен логикой.

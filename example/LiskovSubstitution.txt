@@ -1,0 +1,34 @@
+-------------
+public class Bird {
+    public void eat() {
+        System.out.println("Bird eats");
+    }
+}
+-------------
+public class FlyingBird {
+    public void fly() {
+        System.out.println("Bird flies");
+    }
+}
+-------------
+class Sparrow extends FlyingBird {
+}
+-------------
+class Penguin extends Bird {
+}
+-------------
+@Service
+public class BirdService {
+
+    public void makeBirdFly(FlyingBird bird) {
+        bird.fly();
+    }
+
+    public void makeBirdEat(Bird bird) {
+        bird.eat();
+    }
+
+}
+-------------
+
+Наследование должно быть логически корректным, а не только “чтобы код скомпилировался”.
